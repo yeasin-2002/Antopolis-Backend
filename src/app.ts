@@ -9,10 +9,11 @@ import helmet from "helmet";
 import morgan from "morgan";
 
 // Local imports
-import { limiter } from "./helpers";
 import { defaultErrorHandler, notFoundHandler } from "./middlewares";
-import { rootRouter } from "./router";
 import { port } from "./utils";
+
+import { animalRouter, categoryRouter, rootRouter } from "./router";
+import { connectDB } from "./utils/connectDB";
 
 const app = express();
 app.use(compression());
@@ -22,12 +23,19 @@ app.use(helmet());
 app.use(cors());
 app.use(expressMongoSanitize());
 app.use(morgan("dev"));
-app.use(limiter);
+
+//  Serving static files
+app.use("/uploads", express.static("uploads"));
+
+// Custom routes
+app.use("/animal", animalRouter);
+app.use("/category", categoryRouter);
 
 app.use("/", rootRouter);
 app.use(notFoundHandler);
 app.use(defaultErrorHandler);
 
-app.listen(port, () => {
-    console.log(`⚡Server running on http://localhost:${port}`);
+app.listen(port, async () => {
+    await connectDB();
+    console.log(`🔥 Server running on http://localhost:${port}`);
 });
