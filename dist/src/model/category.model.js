@@ -1,0 +1,1 @@
+Object.defineProperty(exports,"__esModule",{value:true});Object.defineProperty(exports,"Category",{enumerable:true,get:function(){return Category}});const _mongoose=require("mongoose");const categorySchema=new _mongoose.Schema({name:{type:String,required:true,trim:true}});const Category=(0,_mongoose.model)("Category",categorySchema);
