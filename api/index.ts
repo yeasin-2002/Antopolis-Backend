@@ -9,11 +9,11 @@ import helmet from "helmet";
 import morgan from "morgan";
 
 // Local imports
-import { defaultErrorHandler, notFoundHandler } from "./src/middlewares";
-import { port } from "./src/utils";
+import { defaultErrorHandler, notFoundHandler } from "../src/middlewares";
+import { port } from "../src/utils";
 
-import { animalRouter, categoryRouter, rootRouter } from "./src/router";
-import { connectDB } from "./src/utils/connectDB";
+import { animalRouter, categoryRouter, rootRouter } from "../src/router";
+import { connectDB } from "../src/utils/connectDB";
 
 const app = express();
 app.use(compression());
