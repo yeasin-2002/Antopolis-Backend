@@ -1,15 +1,14 @@
 {
   "name": "antopolis-backend",
-  "main": "index.ts",
+  "main": "src/server.ts",
   "scripts": {
     "dev": "concurrently \"npm run watch-compile\" \"npm run watch-dev\"",
-    "dev:bun": "bun --hot ./api/index.ts",
+    "dev:bun": "bun --hot ./src/server.ts",
     "build": "swc src -d dist",
-    "start": "cross-env NODE_ENV=production node ./dist/index.ts ",
+    "start": "cross-env NODE_ENV=production node ./dist/src/server.js ",
     "watch-compile": "swc src -w --out-dir dist",
-    "watch-dev": "nodemon --watch \"dist/**/*\" -e js ./index.ts",
-    "formate": "prettier --write \"src/**/*.ts\" &&  eslint ./src --ext .ts && tsc --noEmit",
-    "lint": "oxlint ./src  "
+    "watch-dev": "nodemon --watch \"dist/**/*\" -e js ./dist/src/server.js",
+    "formate": "prettier --write \"src/**/*.ts\" &&  eslint ./src --ext .ts && tsc --noEmit"
   },
   "dependencies": {
     "body-parser": "^1.20.2",

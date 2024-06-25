@@ -10,5 +10,5 @@
     },
     "include": [
         "src/**/*"
-, "api/index.ts"    ],
+, "src/app.ts"    ],
 }

@@ -9,11 +9,11 @@ import helmet from "helmet";
 import morgan from "morgan";
 
 // Local imports
-import { defaultErrorHandler, notFoundHandler } from "../src/middlewares";
-import { port } from "../src/utils";
+import { defaultErrorHandler, notFoundHandler } from "./middlewares";
+import { port } from "./utils";
 
-import { animalRouter, categoryRouter, rootRouter } from "../src/router";
-import { connectDB } from "../src/utils/connectDB";
+import { animalRouter, categoryRouter, rootRouter } from "./router";
+import { connectDB } from "./utils/connectDB";
 
 const app = express();
 app.use(compression());
@@ -35,7 +35,9 @@ app.use("/", rootRouter);
 app.use(notFoundHandler);
 app.use(defaultErrorHandler);
 
-app.listen(port, async () => {
-    await connectDB();
-    console.log(`🔥 Server running on http://localhost:${port}`);
-});
+// app.listen(port, async () => {
+//     await connectDB();
+//     console.log(`🔥 Server running on http://localhost:${port}`);
+// });
+
+export default app;
