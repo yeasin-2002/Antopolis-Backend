@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
+import { isValidObjectId } from "mongoose";
 import { db } from "../../model";
 import { errorResponse, successResponse } from "../../utils/responseHandler";
 
 export const getAnimal = async (req: Request, res: Response) => {
-    const allAnimal = await db.Animal.find({});
+    const allAnimal = await db.Animal.find({}).populate("category");
     return successResponse({
         res,
         message: `Get ${allAnimal.length} Animal`,
@@ -12,6 +13,7 @@ export const getAnimal = async (req: Request, res: Response) => {
 };
 
 export const AddAnimal = async (req: Request, res: Response) => {
+    console.table(req.body);
     try {
         const body = req.body as {
             name: string;
@@ -23,7 +25,7 @@ export const AddAnimal = async (req: Request, res: Response) => {
         if (!body.name || !body.category || !body.image) {
             return errorResponse({
                 res,
-                message: "name, category and image is required",
+                message: "name, category and image are required",
                 statusCode: 400,
             });
         }
@@ -41,11 +43,13 @@ export const AddAnimal = async (req: Request, res: Response) => {
 
         // 3. adding animal
         console.log("adding animal");
+
         const newAnimal = await db.Animal.create({
             name: body.name,
-            category: body.category,
             image: body.image,
+            category: body.category,
         });
+
         if (!newAnimal) throw new Error("unable to add animal");
 
         // 4. return response

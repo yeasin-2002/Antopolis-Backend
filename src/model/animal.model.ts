@@ -10,9 +10,9 @@ const animalSchema = new Schema({
         require: true,
     },
     category: {
-        type: Schema.Types.ObjectId,
-        ref: "Category",
+        type: String,
         require: true,
+        trim: true,
     },
 });
 
