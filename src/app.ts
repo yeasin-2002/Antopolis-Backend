@@ -35,9 +35,7 @@ app.use("/", rootRouter);
 app.use(notFoundHandler);
 app.use(defaultErrorHandler);
 
-// app.listen(port, async () => {
-//     await connectDB();
-//     console.log(`🔥 Server running on http://localhost:${port}`);
-// });
-
-export default app;
+app.listen(port, async () => {
+    await connectDB();
+    console.log(`🔥 Server running on http://localhost:${port}`);
+});
